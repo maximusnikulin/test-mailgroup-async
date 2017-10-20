@@ -1,9 +1,17 @@
-console.log('Before');
+var asyncForEach = require('../asyncForEach/index.js');
+var assert = require('assert');
 
-asyncForEach([1,2,3], function (item, index, next) {      
-  console.log('Item %s at %s', item, index);
-  setTimeout(next, 10);    
-})
-.then(() => console.log("Done"))
-
-console.log('After');
+describe('Test for asynForEach', function() {
+    it('Entry - [1, 2, 3]', function(done) {
+        var counter = 0,
+            tests = [1, 2, 3];
+        asyncForEach(tests, function (item, index, next) {
+            assert.equal(index, counter);
+            assert.equal(item, tests[counter]);
+            counter++;
+            setTimeout(next, 10);
+        }).then(function () {
+            done();
+        });
+    });
+});

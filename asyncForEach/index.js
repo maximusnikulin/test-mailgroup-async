@@ -1,5 +1,6 @@
 function asyncForEach (arr, fn) {  
     var defaultLog  = console.log;
+    
     var customLog = function() {
         var args = [].slice.call(arguments, 0);
         var str = args[0];            
@@ -25,6 +26,7 @@ function asyncForEach (arr, fn) {
     .then(() => new Promise(function(res,rej) {
        console.log =  defaultLog;
        res();
-    }));        
-                
+    }));                       
 }
+
+module.exports = asyncForEach;
